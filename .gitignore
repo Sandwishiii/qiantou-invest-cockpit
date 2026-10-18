@@ -1,0 +1,14 @@
+# 演示数据、缓存、备份都不进仓库（里面可能有你的真实持仓和金额）
+data/portfolio.json
+data/cache/
+data/backup/
+data/*.log
+data/_*/
+
+# 第三方库自己下载，见 装依赖.bat
+vendor/
+
+# 编辑器/系统杂物
+.DS_Store
+Thumbs.db
+*.tmp
