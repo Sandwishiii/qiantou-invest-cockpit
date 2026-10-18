@@ -23,6 +23,7 @@ const CACHE_DIR = path.join(DATA_DIR, 'cache');
 const BACKUP_DIR = path.join(DATA_DIR, 'backup');
 const PORTFOLIO_FILE = path.join(DATA_DIR, 'portfolio.json');
 const PORT = Number(process.env.PORT || 8618);
+const HOST = process.env.HOST || '127.0.0.1';
 
 for (const d of [DATA_DIR, CACHE_DIR, BACKUP_DIR]) {
   if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
@@ -1135,7 +1136,7 @@ function serveStatic(res, urlPath) {
 
 const routes = {
   async '/api/health'() {
-    return { ok: true, port: PORT, node: process.version, time: new Date().toISOString() };
+    return { ok: true, host: HOST, port: PORT, node: process.version, time: new Date().toISOString() };
   },
 
   async '/api/quotes'(q) {
@@ -1295,8 +1296,9 @@ const server = http.createServer(async (req, res) => {
   serveStatic(res, pathname);
 });
 
-server.listen(PORT, '127.0.0.1', () => {
-  log(`钱途 · 个人投资管理舱 已启动 ->  http://127.0.0.1:${PORT}`);
+server.listen(PORT, HOST, () => {
+  log(`钱途 · 个人投资管理舱 已启动 ->  http://${HOST === '0.0.0.0' ? '127.0.0.1' : HOST}:${PORT}`);
   const p = readPortfolio();
   log(`持仓 ${p.holdings.length} 只 / 交易流水 ${p.trades.length} 条 / 关注 ETF 分组 ${(p.etfGroups || []).length} 个`);
+  if (HOST !== '127.0.0.1') log('⚠ 当前监听 ' + HOST + '：本服务没有登录鉴权，谁连上端口就能看和改你的持仓，请确保安全组只放行你自己的 IP');
 });
