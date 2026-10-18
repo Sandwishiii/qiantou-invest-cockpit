@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>钱途 · 个人投资管理舱</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23d8392e'/><text x='16' y='23' font-size='18' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>钱</text></svg>">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">钱途</span>
+    <span class="sub">个人投资管理舱</span>
+  </div>
+  <div class="topbar-right">
+    <label class="switch"><input type="checkbox" id="tgClosed"><span class="sl"></span>显示已清仓</label>
+    <label class="switch"><input type="checkbox" id="tgMask" checked><span class="sl"></span>隐藏敏感数字</label>
+    <button class="btn primary" id="btnAdd">添加持仓</button>
+    <span class="upd">更新时间 <b id="updTime">--</b></span>
+    <button class="btn primary" id="btnRefresh">立即刷新</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="view"><div class="skeleton"><span class="spin"></span>正在加载真实行情…</div></main>
+
+<div id="modalRoot"></div>
+<div class="toast" id="toast"></div>
+
+<script src="vendor/echarts.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
